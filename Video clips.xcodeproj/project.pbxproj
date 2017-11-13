@@ -17,7 +17,6 @@
 		11B1EF2A1FB771ED009C872C /* ClipsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B1EF281FB771ED009C872C /* ClipsListTableViewCell.xib */; };
 		11B1EF2C1FB7739C009C872C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1EF2B1FB7739C009C872C /* Constants.swift */; };
 		11B1EF321FB77A5D009C872C /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1EF311FB77A5D009C872C /* VideoPlayerViewController.swift */; };
-		11B1EF341FB77AF5009C872C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1EF331FB77AF5009C872C /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		11B1EF281FB771ED009C872C /* ClipsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClipsListTableViewCell.xib; sourceTree = "<group>"; };
 		11B1EF2B1FB7739C009C872C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		11B1EF311FB77A5D009C872C /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
-		11B1EF331FB77AF5009C872C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +45,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11AB70EB1FBA1AAD00E1640D /* ClipsListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				11B1EF271FB771ED009C872C /* ClipsListTableViewCell.swift */,
+				11B1EF281FB771ED009C872C /* ClipsListTableViewCell.xib */,
+			);
+			path = ClipsListViewController;
+			sourceTree = "<group>";
+		};
+		11AB70EC1FBA1FDC00E1640D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				11B1EF151FB76B53009C872C /* Info.plist */,
+				11B1EF091FB76B53009C872C /* AppDelegate.swift */,
+				11B1EF101FB76B53009C872C /* Assets.xcassets */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		11B1EEFD1FB76B53009C872C = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +89,7 @@
 				11B1EF1B1FB76B92009C872C /* Models */,
 				11B1EF201FB76D4D009C872C /* Storyboards */,
 				11B1EF211FB76D73009C872C /* Supporting Files */,
-				11B1EF331FB77AF5009C872C /* ViewController.swift */,
+				11AB70EC1FBA1FDC00E1640D /* Other */,
 			);
 			path = "Video clips";
 			sourceTree = "<group>";
@@ -89,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				11B1EF221FB76DFC009C872C /* ClipsListViewController.swift */,
+				11B1EF311FB77A5D009C872C /* VideoPlayerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -112,9 +130,6 @@
 		11B1EF211FB76D73009C872C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				11B1EF151FB76B53009C872C /* Info.plist */,
-				11B1EF091FB76B53009C872C /* AppDelegate.swift */,
-				11B1EF101FB76B53009C872C /* Assets.xcassets */,
 				11B1EF2B1FB7739C009C872C /* Constants.swift */,
 			);
 			path = "Supporting Files";
@@ -123,9 +138,7 @@
 		11B1EF261FB771C4009C872C /* Controlls */ = {
 			isa = PBXGroup;
 			children = (
-				11B1EF271FB771ED009C872C /* ClipsListTableViewCell.swift */,
-				11B1EF281FB771ED009C872C /* ClipsListTableViewCell.xib */,
-				11B1EF311FB77A5D009C872C /* VideoPlayerViewController.swift */,
+				11AB70EB1FBA1AAD00E1640D /* ClipsListViewController */,
 			);
 			path = Controlls;
 			sourceTree = "<group>";
@@ -208,7 +221,6 @@
 				11B1EF321FB77A5D009C872C /* VideoPlayerViewController.swift in Sources */,
 				11B1EF251FB76F55009C872C /* ClipsListViewModel.swift in Sources */,
 				11B1EF0A1FB76B53009C872C /* AppDelegate.swift in Sources */,
-				11B1EF341FB77AF5009C872C /* ViewController.swift in Sources */,
 				11B1EF2C1FB7739C009C872C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				INFOPLIST_FILE = "$(SRCROOT)/Video clips/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Video clips/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sa.Video-clips";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -355,7 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				INFOPLIST_FILE = "$(SRCROOT)/Video clips/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Video clips/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sa.Video-clips";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,18 +8,15 @@
 
 import Foundation
 
-class ClipsListViewModel {
+struct ClipsListCoordinatorModel {
     
-    private init() { }
+    private(set)var coordinatorDidUpdateClipsListBlock: (_ clipsList: [Clip], _ error: Error?) ->()
     
-    static let shared: ClipsListViewModel = {
-        let instance = ClipsListViewModel()
-        return instance
-    }()
+    init(coordinatorDidUpdateClipsListBlock: @escaping (_ clipsList: [Clip], _ error: Error?) ->()) {
+        self.coordinatorDidUpdateClipsListBlock = coordinatorDidUpdateClipsListBlock
+    }
     
-    typealias CompletionBlock = ([Clip]?, _ error: Error?) -> Void
-    
-    func viewModel(page: Int, completionBlock: @escaping CompletionBlock){
+    func loadClipsList(page: Int){
         guard let url = URL(string: Constants.loadPage) else { return }
         
         var request = URLRequest.init(url: url)
@@ -38,17 +35,16 @@ class ClipsListViewModel {
             
             do {
                 let locList = try JSONDecoder().decode(DataResponce.self, from: data)
-                completionBlock((locList.data?.clips)!, error)
-                
+                self.coordinatorDidUpdateClipsListBlock((locList.data?.clips)!, error)
             } catch let error {
                 print(error)
             }
             
             }.resume()
     }
-}
-
-protocol ViewModel {
+    
+    
+    
     
 
 }

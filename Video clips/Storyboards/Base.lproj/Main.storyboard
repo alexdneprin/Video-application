@@ -10,6 +10,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Thin</string>
+        </array>
+        <array key="Noteworthy.ttc">
+            <string>Noteworthy-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Clips List View Controller-->
         <scene sceneID="zJ1-h3-Bwb">
@@ -26,22 +34,35 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mqC-pt-vdh">
-                                                <rect key="frame" x="96.5" y="15.5" width="182" height="29"/>
+                                                <rect key="frame" x="179" y="15.5" width="180" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="uvN-lk-HqU"/>
+                                                </constraints>
                                                 <segments>
                                                     <segment title="" width="60"/>
                                                     <segment title="" width="60"/>
                                                     <segment title="" width="60"/>
                                                 </segments>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="indexChanged:" destination="7Tl-3T-n8i" eventType="valueChanged" id="fQ7-Qr-ofU"/>
                                                 </connections>
                                             </segmentedControl>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language 🚀" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Zm-rC-Z7e">
+                                                <rect key="frame" x="8" y="18" width="167" height="24"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="0Zm-rC-Z7e" firstAttribute="leading" secondItem="UFJ-lk-HvU" secondAttribute="leading" constant="8" id="4Mw-eh-B2l"/>
                                             <constraint firstItem="mqC-pt-vdh" firstAttribute="centerY" secondItem="UFJ-lk-HvU" secondAttribute="centerY" id="4qg-Ra-vE5"/>
                                             <constraint firstAttribute="height" constant="60" id="Cah-CW-s9v"/>
-                                            <constraint firstItem="mqC-pt-vdh" firstAttribute="centerX" secondItem="UFJ-lk-HvU" secondAttribute="centerX" id="rvc-R6-ufI"/>
+                                            <constraint firstAttribute="trailing" secondItem="mqC-pt-vdh" secondAttribute="trailing" constant="16" id="E8j-Zc-HP1"/>
+                                            <constraint firstItem="0Zm-rC-Z7e" firstAttribute="centerY" secondItem="UFJ-lk-HvU" secondAttribute="centerY" id="PQM-aE-hcU"/>
+                                            <constraint firstItem="mqC-pt-vdh" firstAttribute="leading" secondItem="0Zm-rC-Z7e" secondAttribute="trailing" constant="4" id="eSs-5H-fx8"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="300" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fW3-lc-TKN">
@@ -80,7 +101,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="80"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-Pz-7pj">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-Pz-7pj">
                                                     <rect key="frame" x="0.0" y="0.0" width="44" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -100,20 +121,28 @@
                                         </constraints>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to close the video? Just swipe down!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EY-v7-ejO">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20448951198630136" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="34"/>
+                                        <color key="textColor" red="0.98857118489999996" green="0.99941459079999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="suY-GB-1xr" secondAttribute="trailing" id="64j-8G-4vD"/>
                                     <constraint firstAttribute="trailing" secondItem="ExN-jc-usG" secondAttribute="trailing" constant="18" id="FpZ-iY-Py9"/>
+                                    <constraint firstAttribute="trailing" secondItem="2EY-v7-ejO" secondAttribute="trailing" id="ORc-rN-Ur5"/>
                                     <constraint firstAttribute="bottom" secondItem="suY-GB-1xr" secondAttribute="bottom" id="YGb-qL-hCM"/>
+                                    <constraint firstItem="2EY-v7-ejO" firstAttribute="leading" secondItem="Rrw-fK-qDr" secondAttribute="leading" id="eBG-gS-MAm"/>
                                     <constraint firstItem="suY-GB-1xr" firstAttribute="leading" secondItem="Rrw-fK-qDr" secondAttribute="leading" id="fE8-cD-cSJ"/>
                                     <constraint firstItem="ExN-jc-usG" firstAttribute="centerY" secondItem="Rrw-fK-qDr" secondAttribute="centerY" id="s1w-1c-Oik"/>
+                                    <constraint firstItem="2EY-v7-ejO" firstAttribute="top" secondItem="Rrw-fK-qDr" secondAttribute="top" id="tUe-0z-pCM"/>
                                     <constraint firstItem="suY-GB-1xr" firstAttribute="top" secondItem="Rrw-fK-qDr" secondAttribute="top" id="vrX-Yy-jwl"/>
+                                    <constraint firstAttribute="bottom" secondItem="2EY-v7-ejO" secondAttribute="bottom" id="yLj-dF-XdQ"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="GMh-9U-fh5" appends="YES" id="cje-fR-Ig4"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.85319456339999999" colorSpace="calibratedRGB"/>
@@ -130,6 +159,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="D48-XU-nVP"/>
                     <connections>
+                        <outlet property="closeMessageLabel" destination="2EY-v7-ejO" id="lhV-KM-dHC"/>
                         <outlet property="languageSegmentControll" destination="mqC-pt-vdh" id="hsv-eS-gZO"/>
                         <outlet property="playerView" destination="Rrw-fK-qDr" id="W1O-TT-Bn5"/>
                         <outlet property="playerViewWidthConstraint" destination="34e-Ey-HHb" id="mOd-yw-pb4"/>
@@ -140,7 +170,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOE-rZ-JHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="GMh-9U-fh5"/>
             </objects>
             <point key="canvasLocation" x="468" y="328.78560719640183"/>
         </scene>

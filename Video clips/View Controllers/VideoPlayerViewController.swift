@@ -22,11 +22,9 @@ class VideoPlayerViewController: AVPlayerViewController {
         
         self.swipeSetup()
         
-        // Play video
-        
+        /* Observe Notification from CLipsList View */
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadNewVideo(_:)), name: NSNotification.Name(rawValue: Constants.kLoadNewVideo), object: nil)
-        
-        // Play video from time code
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.resolutionChanged), name: NSNotification.Name(rawValue: Constants.kResolutionChanged), object: nil)
     }
@@ -49,15 +47,18 @@ class VideoPlayerViewController: AVPlayerViewController {
             if swipeGesture.direction == UISwipeGestureRecognizerDirection.down{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kClosePlayerView), object: nil, userInfo: nil)
                 
-                self.player = nil
+                let launchedBefore = UserDefaults.standard.bool(forKey: Constants.launchedBefore)
+                if launchedBefore  {
+                    self.player = nil
+                } else {
+                    UserDefaults.standard.set(true, forKey: Constants.launchedBefore)
+                }
             }
         }
     }
     
-    
     //MARK: - Override Touch Methods -
     //*********************************************
-    
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -83,12 +84,7 @@ class VideoPlayerViewController: AVPlayerViewController {
         super.touchesBegan(touches, with: event)
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        super.touchesEnded(touches, with: event)
-    }
-    
-    //MARK: -  Observer methods -
+    //MARK: -  Observer Selectors -
     //*********************************************
     
     @objc func loadNewVideo(_ notification: NSNotification) {

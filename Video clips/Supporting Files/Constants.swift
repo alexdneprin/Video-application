@@ -12,12 +12,10 @@ import UIKit /* this is needed for UIScreen.main.bounds */
 
 struct Constants {
     
-    //MARK: - Network Manager -
+    //MARK: - Network  -
     //***************************************************
     
     static let get = "GET"
-    
-    // URL Constructor
     
     static let baseURL = "http://dev.see.ua"
     static let page = "/?page="
@@ -36,7 +34,7 @@ struct Constants {
     
     // UI
     
-    static let languages = ["en", "ru", "ua"]
+    static let languages = ["EN", "RU", "UA"]
     static let textFont = "Helvetica-Thin"
     static let textSize: CGFloat = 5.0
     static let cornerRadius: CGFloat = 15.0
@@ -55,9 +53,10 @@ struct Constants {
     static let kClosePlayerView = "kClosePlayerView"
     static let kHidePlaybackItems = "kHidePlaybackItems"
     static let kShowPlaybackItems = "kShowPlaybackItems"
+    static let kVideoPlayerClearMemory = "kShowPlaybackItems"
+
     
     // Other
-    
     
     static let screenBounds = UIScreen.main.bounds
     static let screenScale = UIScreen.main.scale
@@ -66,5 +65,10 @@ struct Constants {
     
     static let screenSize = CGSize(width: screenBounds.size.width * screenScale, height: screenBounds.size.height * screenScale)
     static let screenWidthString = String(describing: screenSize.width)
+    
+    static let launchedBefore = "launchedBefore"
+    static let youAwesameMessage = "You are awesome! Enjoy watching!)"
+
+    
 }
 

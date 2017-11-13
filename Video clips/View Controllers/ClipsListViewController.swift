@@ -12,26 +12,28 @@ import AVKit
 
 class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var playerView: UIView!
-    @IBOutlet weak var videoResolutionStackView: UIStackView!
-    
-    @IBOutlet weak var languageSegmentControll: UISegmentedControl!
-    
-    @IBOutlet weak var resolutionVisualEffectView: UIVisualEffectView!
-    
-    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var playerViewWidthConstraint: NSLayoutConstraint!
-    
+    var coordinatorModel: ClipsListCoordinatorModel!
     var clips = [Clip]()
     var itemFiles = [File]()
     
-    // Pagination
+    // ***********************
+    // Clips List View
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var languageSegmentControll: UISegmentedControl!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     
     var currentPageNumber: Int = 0
     var isPageRefresing: Bool = false
     
-    let clipsListViewModel = ClipsListViewModel.shared
+    // ***********************
+    // Player View
+
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var resolutionVisualEffectView: UIVisualEffectView!
+    @IBOutlet weak var videoResolutionStackView: UIStackView!
+    @IBOutlet weak var playerViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closeMessageLabel: UILabel!
     
     //MARK: - View Controller Methods -
     //*********************************************
@@ -39,9 +41,8 @@ class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate 
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        self.setupViewController()
-        self.loadClipsList(page: Constants.one)
-        self.hidePlaybackItems()
+        self.setupClipsListView()
+        self.setupPlayerView()
         
         /* Observe Notification from VideoPlayer */
         
@@ -50,17 +51,32 @@ class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(self.hidePlaybackItems), name: NSNotification.Name(rawValue: Constants.kHidePlaybackItems), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.closePlayerView), name: NSNotification.Name(rawValue: Constants.kClosePlayerView), object: nil)
-        
     }
     
-    func setupViewController(){
+    
+    //*********************************************
+    //MARK: - CLips List View -
+    //*********************************************
+    
+    
+    func setupClipsListView(){
+        
+        coordinatorModel = ClipsListCoordinatorModel(coordinatorDidUpdateClipsListBlock: { [weak self] (clips, error) in
+            
+            guard let `self` = self else { return }
+            
+            if (error == nil) {
+                self.clips.append(contentsOf: clips)
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        
+        coordinatorModel.loadClipsList(page: Constants.one)
         
         tableView.register(UINib.init(nibName: String(describing:ClipsListTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing:ClipsListTableViewCell.self))
-        
-        self.playerView.isHidden = true
-        self.playerViewWidthConstraint.constant = Constants.screenBounds.width
-        
-        self.resolutionVisualEffectView.layer.cornerRadius = CGFloat(Constants.cornerRadius)
         
         for (index, language) in Constants.languages.enumerated() {
             self.languageSegmentControll.setTitle(language, forSegmentAt: index)
@@ -69,31 +85,11 @@ class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate 
         self.currentPageNumber = Constants.one
     }
     
-    //MARK: - Actions -
+    //MARK: - Actions & Selectors -
     //*********************************************
-    
-    @objc func closePlayerView(){
-        self.playerView.isHidden = true
-    }
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
-    }
-    
-    @objc func hidePlaybackItems(){
-        
-        self.resolutionVisualEffectView.alpha = 1.0
-        UIView.animate(withDuration: 0.4, animations: {
-            self.resolutionVisualEffectView.alpha = 0.0
-        })
-    }
-    
-    @objc func showPlaybackItems(){
-        
-        self.resolutionVisualEffectView.alpha = 0.0
-        UIView.animate(withDuration: 0.4, animations: {
-            self.resolutionVisualEffectView.alpha = 1.0
-        })
     }
     
     @objc func changeResolutionButtonPressed(sender: UIButton!) {
@@ -101,7 +97,6 @@ class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate 
         self.hidePlaybackItems()
         
         if let idOptional = self.itemFiles[sender.tag].id{
-            
             let idString: String!
             idString = String(describing: idOptional)
             let videoData:[String: String] = [Constants.url: idString]
@@ -109,26 +104,12 @@ class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate 
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kResolutionChanged), object: nil, userInfo: videoData)
         }
     }
-    
-    func loadClipsList(page: Int){
-        
-        clipsListViewModel.viewModel(page: page) { [weak self] (clips, error) in
-            
-            guard let `self` = self else { return }
-            
-            if (error == nil) {
-                self.clips.append(contentsOf: clips!)
-            }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
 }
 
-
 extension ClipsListViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    //Mark: - UITableView Data Source -
+    //*********************************************
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -138,14 +119,13 @@ extension ClipsListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Constants.one
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return Constants.one }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clips.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return clips.count }
     
+    //Mark: - UITableView Delegate -
+    //*********************************************
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let idOptional: String!
@@ -166,7 +146,6 @@ extension ClipsListViewController: UITableViewDataSource, UITableViewDelegate {
             
             self.playVideoFromURL(url: videoURL!)
         }
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -177,27 +156,35 @@ extension ClipsListViewController: UITableViewDataSource, UITableViewDelegate {
                 isPageRefresing = true
                 
                 currentPageNumber += 1
-                self.loadClipsList(page: currentPageNumber)
+                coordinatorModel.loadClipsList(page: currentPageNumber)
             }
         }
-        
     }
 }
 
-extension ClipsListViewController {
-    
-    func playVideoFromURL(url: URL, time: CMTime? = nil){
 
-        self.playerView.isHidden = false
+//*********************************************
+//MARK: - Player View -
+//*********************************************
+
+
+extension ClipsListViewController {
+
+    func setupPlayerView(){
         
-        let videoData:[String: Any] = [Constants.url: url]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kLoadNewVideo), object: nil, userInfo: videoData)
+        self.closeMessageLabel.isHidden = true
+        
+        self.hidePlaybackItems()
+
+        self.resolutionVisualEffectView.layer.cornerRadius = CGFloat(Constants.cornerRadius)
+        
+        self.playerView.isHidden = true
+        self.playerViewWidthConstraint.constant = Constants.screenBounds.width
         
     }
     
     func drawResolutionButtons(){
-        self.videoResolutionStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.stackViewHeightConstraint.constant = CGFloat(self.itemFiles.count * Constants.resolutionButtonSize)
         
         for (position, item) in self.itemFiles.enumerated() {
@@ -210,6 +197,57 @@ extension ClipsListViewController {
             
             resolutionButton.addTarget(self, action: #selector(changeResolutionButtonPressed), for: .touchUpInside)
             self.videoResolutionStackView.addArrangedSubview(resolutionButton)
+        }
+        
+        let launchedBefore = UserDefaults.standard.bool(forKey: Constants.launchedBefore)
+        if launchedBefore  {
+            self.closeMessageLabel.isHidden = true
+        } else {
+            self.closeMessageLabel.isHidden = false
+        }
+        
+    }
+    
+    //MARK: - Actions & Selectors -
+    //*********************************************
+    
+    func hideMessage(button: UIButton){
+        button.isHidden = true
+    }
+    
+    @objc func hidePlaybackItems(){
+        
+        self.resolutionVisualEffectView.alpha = 1.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.resolutionVisualEffectView.alpha = 0.0
+        })
+    }
+    
+    @objc func showPlaybackItems(){
+        
+        self.resolutionVisualEffectView.alpha = 0.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.resolutionVisualEffectView.alpha = 1.0
+        })
+    }
+    
+    func playVideoFromURL(url: URL, time: CMTime? = nil){
+        
+        self.playerView.isHidden = false
+        
+        let videoData:[String: Any] = [Constants.url: url]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kLoadNewVideo), object: nil, userInfo: videoData)
+        
+    }
+    
+    @objc func closePlayerView(){
+        if !self.closeMessageLabel.isHidden {
+            self.closeMessageLabel.text = Constants.youAwesameMessage
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000)) {
+                self.closeMessageLabel.isHidden = true
+            }
+        } else {
+            self.playerView.isHidden = true
         }
     }
     
