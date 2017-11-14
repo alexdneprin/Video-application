@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11252EFB1FBB014F007A9B72 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11252EFA1FBB014F007A9B72 /* PlayerView.swift */; };
 		11B1EF0A1FB76B53009C872C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1EF091FB76B53009C872C /* AppDelegate.swift */; };
 		11B1EF0F1FB76B53009C872C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B1EF0D1FB76B53009C872C /* Main.storyboard */; };
 		11B1EF111FB76B53009C872C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B1EF101FB76B53009C872C /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11252EFA1FBB014F007A9B72 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		11B1EF061FB76B53009C872C /* Video clips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video clips.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B1EF091FB76B53009C872C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B1EF0E1FB76B53009C872C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				11AB70EB1FBA1AAD00E1640D /* ClipsListViewController */,
+				11252EFA1FBB014F007A9B72 /* PlayerView.swift */,
 			);
 			path = Controlls;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				11B1EF291FB771ED009C872C /* ClipsListTableViewCell.swift in Sources */,
 				11B1EF1E1FB76CAA009C872C /* Clip.swift in Sources */,
 				11B1EF231FB76DFC009C872C /* ClipsListViewController.swift in Sources */,
+				11252EFB1FBB014F007A9B72 /* PlayerView.swift in Sources */,
 				11B1EF321FB77A5D009C872C /* VideoPlayerViewController.swift in Sources */,
 				11B1EF251FB76F55009C872C /* ClipsListViewModel.swift in Sources */,
 				11B1EF0A1FB76B53009C872C /* AppDelegate.swift in Sources */,

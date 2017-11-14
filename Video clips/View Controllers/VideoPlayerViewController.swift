@@ -12,30 +12,33 @@ import AVKit
 class VideoPlayerViewController: AVPlayerViewController {
     
     public var url: URL? = nil
-    var playbackControllsIsShowing: Bool = false
+    
     
     // View Controller Methods
     //*********************************************
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.swipeSetup()
-        
-        /* Observe Notification from CLipsList View */
 
+        /* Observe Notification from CLipsList View */
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadNewVideo(_:)), name: NSNotification.Name(rawValue: Constants.kLoadNewVideo), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.resolutionChanged), name: NSNotification.Name(rawValue: Constants.kResolutionChanged), object: nil)
     }
     
-    //MARK: - Private -
+    
+    //MARK: - TUtorial View Swipe Setup -
     //*********************************************
     
+    
     func swipeSetup(){
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(swipeUp)
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
@@ -46,37 +49,21 @@ class VideoPlayerViewController: AVPlayerViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             if swipeGesture.direction == UISwipeGestureRecognizerDirection.down{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kClosePlayerView), object: nil, userInfo: nil)
+                self.player = nil
+            } else if swipeGesture.direction == UISwipeGestureRecognizerDirection.up {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kShowPlaybackItems), object: nil, userInfo: nil)
                 
-                let launchedBefore = UserDefaults.standard.bool(forKey: Constants.launchedBefore)
-                if launchedBefore  {
-                    self.player = nil
-                } else {
-                    UserDefaults.standard.set(true, forKey: Constants.launchedBefore)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Constants.timeDelay)) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kHidePlaybackItems), object: nil, userInfo: nil)
                 }
             }
         }
     }
     
+    
     //MARK: - Override Touch Methods -
     //*********************************************
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if self.playbackControllsIsShowing {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kHidePlaybackItems), object: nil, userInfo: nil)
-            self.playbackControllsIsShowing = false
-        } else {
-            self.playbackControllsIsShowing = true
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kShowPlaybackItems), object: nil, userInfo: nil)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2900)) {
-                self.playbackControllsIsShowing = false
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.kHidePlaybackItems), object: nil, userInfo: nil)
-            }
-        }
-        
-        super.touchesCancelled(touches, with: event)
-    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -84,11 +71,13 @@ class VideoPlayerViewController: AVPlayerViewController {
         super.touchesBegan(touches, with: event)
     }
     
+    
     //MARK: -  Observer Selectors -
     //*********************************************
     
+    
     @objc func loadNewVideo(_ notification: NSNotification) {
-        let currentTime = CMTime.init(seconds: 0.0, preferredTimescale: CMTimeScale(Constants.one))
+        let currentTime = CMTime.init(seconds: Double(Constants.zero), preferredTimescale: CMTimeScale(Constants.one))
         let url = notification.userInfo?[Constants.url] as! URL
         self.videoLoading(url: url, time: currentTime)
     }

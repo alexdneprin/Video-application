@@ -6,7 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,7 +88,7 @@
                                     <constraint firstAttribute="trailing" secondItem="UFJ-lk-HvU" secondAttribute="trailing" id="wye-L8-0P8"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rrw-fK-qDr">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rrw-fK-qDr" customClass="PlayerView" customModule="Video_clips" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suY-GB-1xr">
@@ -96,17 +98,14 @@
                                         </connections>
                                     </containerView>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ExN-jc-usG">
-                                        <rect key="frame" x="313" y="293.5" width="44" height="80"/>
+                                        <rect key="frame" x="94.5" y="293.5" width="187.5" height="80"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FPX-77-Ch6">
-                                            <rect key="frame" x="0.0" y="0.0" width="44" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-Pz-7pj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="80"/>
+                                                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-Pz-7pj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="rar-YX-qLz"/>
-                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -117,32 +116,51 @@
                                             </constraints>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="w31-d9-7U9"/>
+                                            <constraint firstAttribute="width" secondItem="ExN-jc-usG" secondAttribute="height" multiplier="187:80" id="viW-nP-DXb"/>
                                         </constraints>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to close the video? Just swipe down!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EY-v7-ejO">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXo-7Z-T2c">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20448951198630136" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="34"/>
-                                        <color key="textColor" red="0.98857118489999996" green="0.99941459079999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How can I change the video quality? Just Swipe Up" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EY-v7-ejO">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20448951198630136" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="34"/>
+                                                <color key="textColor" red="0.98857118489999996" green="0.99941459079999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="2EY-v7-ejO" firstAttribute="top" secondItem="lXo-7Z-T2c" secondAttribute="top" id="UJv-L7-DLY"/>
+                                            <constraint firstItem="2EY-v7-ejO" firstAttribute="leading" secondItem="lXo-7Z-T2c" secondAttribute="leading" id="giO-O7-amf"/>
+                                            <constraint firstAttribute="bottom" secondItem="2EY-v7-ejO" secondAttribute="bottom" id="kKv-Rf-rUg"/>
+                                            <constraint firstAttribute="trailing" secondItem="2EY-v7-ejO" secondAttribute="trailing" id="xxn-xn-bBb"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="ExN-jc-usG" firstAttribute="width" secondItem="Rrw-fK-qDr" secondAttribute="width" multiplier="1:2" id="3Ok-Aa-2O7"/>
                                     <constraint firstAttribute="trailing" secondItem="suY-GB-1xr" secondAttribute="trailing" id="64j-8G-4vD"/>
-                                    <constraint firstAttribute="trailing" secondItem="ExN-jc-usG" secondAttribute="trailing" constant="18" id="FpZ-iY-Py9"/>
-                                    <constraint firstAttribute="trailing" secondItem="2EY-v7-ejO" secondAttribute="trailing" id="ORc-rN-Ur5"/>
+                                    <constraint firstAttribute="bottom" secondItem="lXo-7Z-T2c" secondAttribute="bottom" id="6K7-V7-kw7"/>
+                                    <constraint firstItem="lXo-7Z-T2c" firstAttribute="top" secondItem="Rrw-fK-qDr" secondAttribute="top" id="6QI-SZ-k6v"/>
+                                    <constraint firstItem="ExN-jc-usG" firstAttribute="centerX" secondItem="Rrw-fK-qDr" secondAttribute="centerX" id="QuY-Rt-WlV"/>
+                                    <constraint firstItem="lXo-7Z-T2c" firstAttribute="leading" secondItem="Rrw-fK-qDr" secondAttribute="leading" id="TTM-HE-gha"/>
                                     <constraint firstAttribute="bottom" secondItem="suY-GB-1xr" secondAttribute="bottom" id="YGb-qL-hCM"/>
-                                    <constraint firstItem="2EY-v7-ejO" firstAttribute="leading" secondItem="Rrw-fK-qDr" secondAttribute="leading" id="eBG-gS-MAm"/>
                                     <constraint firstItem="suY-GB-1xr" firstAttribute="leading" secondItem="Rrw-fK-qDr" secondAttribute="leading" id="fE8-cD-cSJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="lXo-7Z-T2c" secondAttribute="trailing" id="qzn-HF-XF4"/>
                                     <constraint firstItem="ExN-jc-usG" firstAttribute="centerY" secondItem="Rrw-fK-qDr" secondAttribute="centerY" id="s1w-1c-Oik"/>
-                                    <constraint firstItem="2EY-v7-ejO" firstAttribute="top" secondItem="Rrw-fK-qDr" secondAttribute="top" id="tUe-0z-pCM"/>
                                     <constraint firstItem="suY-GB-1xr" firstAttribute="top" secondItem="Rrw-fK-qDr" secondAttribute="top" id="vrX-Yy-jwl"/>
-                                    <constraint firstAttribute="bottom" secondItem="2EY-v7-ejO" secondAttribute="bottom" id="yLj-dF-XdQ"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="resolutionVisualEffectView" destination="ExN-jc-usG" id="MQv-6a-e3m"/>
+                                    <outlet property="tutorialLabel" destination="2EY-v7-ejO" id="YWR-He-MMb"/>
+                                    <outlet property="tutorialView" destination="lXo-7Z-T2c" id="hPr-ij-m2H"/>
+                                    <outlet property="videoResolutionStackView" destination="GzD-Pz-7pj" id="3e4-HK-hcY"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.85319456339999999" colorSpace="calibratedRGB"/>
@@ -159,14 +177,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="D48-XU-nVP"/>
                     <connections>
-                        <outlet property="closeMessageLabel" destination="2EY-v7-ejO" id="lhV-KM-dHC"/>
                         <outlet property="languageSegmentControll" destination="mqC-pt-vdh" id="hsv-eS-gZO"/>
-                        <outlet property="playerView" destination="Rrw-fK-qDr" id="W1O-TT-Bn5"/>
+                        <outlet property="playerView" destination="Rrw-fK-qDr" id="tJQ-jN-85U"/>
                         <outlet property="playerViewWidthConstraint" destination="34e-Ey-HHb" id="mOd-yw-pb4"/>
-                        <outlet property="resolutionVisualEffectView" destination="ExN-jc-usG" id="XJX-ps-tz4"/>
-                        <outlet property="stackViewHeightConstraint" destination="rar-YX-qLz" id="EnH-W1-0fg"/>
                         <outlet property="tableView" destination="fW3-lc-TKN" id="Kd3-qq-ZPf"/>
-                        <outlet property="videoResolutionStackView" destination="GzD-Pz-7pj" id="bVZ-2d-YvD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOE-rZ-JHU" userLabel="First Responder" sceneMemberID="firstResponder"/>

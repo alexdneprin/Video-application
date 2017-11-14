@@ -42,10 +42,5 @@ struct ClipsListCoordinatorModel {
             
             }.resume()
     }
-    
-    
-    
-    
-
 }
 

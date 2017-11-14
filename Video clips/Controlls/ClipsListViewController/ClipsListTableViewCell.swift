@@ -55,12 +55,10 @@ class ClipsListTableViewCell: UITableViewCell {
             subtypeLabel.isHidden = true
         }
         
-        let idOptional: String!
-        idOptional = String(describing: item.preview!.id!)
+        if let id = item.preview?.id{
+            let idString = String(id)
         
-        if let id = idOptional{
-            
-            let url = URL(string: Constants.getImage + id + Constants.size + Constants.screenWidthString)
+            let url = URL(string: Constants.getImage + idString + Constants.size + Constants.screenWidthString)
             
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: url!)
