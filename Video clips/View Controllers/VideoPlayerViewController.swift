@@ -11,9 +11,7 @@ import AVKit
 
 class VideoPlayerViewController: AVPlayerViewController {
     
-    public var url: URL? = nil
-    
-    
+//
     // View Controller Methods
     //*********************************************
     

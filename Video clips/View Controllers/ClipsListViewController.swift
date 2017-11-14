@@ -10,7 +10,17 @@ import UIKit
 import Foundation
 import AVKit
 
-class ClipsListViewController: UIViewController, AVPlayerViewControllerDelegate {
+/*
+ 
+    Apple does not allow you to customize the AVPlayerViewController. Therefore, to use it we must find another way. The AVPlayerViewController was placed in the UIContainerView to be able to add objects over the controller.
+ 
+    ClipsListViewController divided the roles ClipsListView and a PlayerView.
+ 
+    The interaction between PlayerView and VideoPlayerViewController(inheritance AVPlayerViewController) is realized by means of NotificationCenter.
+
+*/
+
+class ClipsListViewController: UIViewController {
     
     var coordinatorModel: ClipsListCoordinatorModel!
     var clips = [Clip]()
