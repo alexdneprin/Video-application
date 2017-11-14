@@ -11,7 +11,6 @@ import AVKit
 
 class VideoPlayerViewController: AVPlayerViewController {
     
-//
     // View Controller Methods
     //*********************************************
     

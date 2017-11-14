@@ -10,9 +10,9 @@ import Foundation
 
 struct ClipsListCoordinatorModel {
     
-    private(set)var coordinatorDidUpdateClipsListBlock: (_ clipsList: [Clip], _ error: Error?) ->()
+    private(set)var coordinatorDidUpdateClipsListBlock: (_ clipsList: [Clip]?, _ error: Error?) ->()
     
-    init(coordinatorDidUpdateClipsListBlock: @escaping (_ clipsList: [Clip], _ error: Error?) ->()) {
+    init(coordinatorDidUpdateClipsListBlock: @escaping (_ clipsList: [Clip]?, _ error: Error?) ->()) {
         self.coordinatorDidUpdateClipsListBlock = coordinatorDidUpdateClipsListBlock
     }
     
@@ -26,6 +26,7 @@ struct ClipsListCoordinatorModel {
             
             guard error == nil else {
                 print(error!)
+                self.coordinatorDidUpdateClipsListBlock(nil, error)
                 return
             }
             

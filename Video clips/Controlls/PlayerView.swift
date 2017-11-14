@@ -44,7 +44,7 @@ class PlayerView: UIView {
     //MARK: - Configure PlayerView-
     //*********************************************
     
-    func initWithItem(_ item: Clip) {
+    func showWithItem(_ item: Clip) {
         
         if let id = item.files.last!.id{
             let idString = String(id)

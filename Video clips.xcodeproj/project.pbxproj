@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11252EFB1FBB014F007A9B72 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11252EFA1FBB014F007A9B72 /* PlayerView.swift */; };
+		11252EFE1FBB6481007A9B72 /* UIViewControllerExtencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11252EFD1FBB6481007A9B72 /* UIViewControllerExtencion.swift */; };
 		11B1EF0A1FB76B53009C872C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1EF091FB76B53009C872C /* AppDelegate.swift */; };
 		11B1EF0F1FB76B53009C872C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B1EF0D1FB76B53009C872C /* Main.storyboard */; };
 		11B1EF111FB76B53009C872C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B1EF101FB76B53009C872C /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		11252EFA1FBB014F007A9B72 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		11252EFD1FBB6481007A9B72 /* UIViewControllerExtencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtencion.swift; sourceTree = "<group>"; };
 		11B1EF061FB76B53009C872C /* Video clips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video clips.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B1EF091FB76B53009C872C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B1EF0E1FB76B53009C872C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11252EFC1FBB6457007A9B72 /* Extencions */ = {
+			isa = PBXGroup;
+			children = (
+				11252EFD1FBB6481007A9B72 /* UIViewControllerExtencion.swift */,
+			);
+			path = Extencions;
+			sourceTree = "<group>";
+		};
 		11AB70EB1FBA1AAD00E1640D /* ClipsListViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +99,7 @@
 				11B1EF1C1FB76BA1009C872C /* View Controllers */,
 				11B1EF1F1FB76D32009C872C /* View Models */,
 				11B1EF1B1FB76B92009C872C /* Models */,
+				11252EFC1FBB6457007A9B72 /* Extencions */,
 				11B1EF201FB76D4D009C872C /* Storyboards */,
 				11B1EF211FB76D73009C872C /* Supporting Files */,
 				11AB70EC1FBA1FDC00E1640D /* Other */,
@@ -224,6 +235,7 @@
 				11252EFB1FBB014F007A9B72 /* PlayerView.swift in Sources */,
 				11B1EF321FB77A5D009C872C /* VideoPlayerViewController.swift in Sources */,
 				11B1EF251FB76F55009C872C /* ClipsListViewModel.swift in Sources */,
+				11252EFE1FBB6481007A9B72 /* UIViewControllerExtencion.swift in Sources */,
 				11B1EF0A1FB76B53009C872C /* AppDelegate.swift in Sources */,
 				11B1EF2C1FB7739C009C872C /* Constants.swift in Sources */,
 			);

@@ -76,6 +76,7 @@ struct Constants {
     static let tutorialComplete = "tutorialComplete"
     static let swipeDownToCloseMessage = "Right! To close the video, just swipe down"
     static let youAwesameMessage = "You are awesome! Enjoy watching!)"
+    static let okResponce = "Ok"
 
     // Gesture
     

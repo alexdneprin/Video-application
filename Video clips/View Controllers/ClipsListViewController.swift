@@ -12,7 +12,8 @@ import AVKit
 
 /*
  
-    Apple does not allow you to customize the AVPlayerViewController. Therefore, to use it we must find another way. The AVPlayerViewController was placed in the UIContainerView to be able to add objects over the controller.
+    Apple does not allow you to customize the AVPlayerViewController in open mode. Therefore, to use it we must find another way.
+    The AVPlayerViewController was placed in the UIContainerView to be able to add objects over the controller.
  
     ClipsListViewController divided the roles ClipsListView and a PlayerView.
  
@@ -57,8 +58,10 @@ class ClipsListViewController: UIViewController {
             
             guard let `self` = self else { return }
             
-            if (error == nil) {
-                self.clips.append(contentsOf: clips)
+            if let clipsList = clips {
+                self.clips.append(contentsOf: clipsList)
+            } else {
+                self.showMessage(message: String(describing: error), responce: Constants.okResponce)
             }
             
             DispatchQueue.main.async {
@@ -114,7 +117,7 @@ extension ClipsListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.playerView.isHidden = false
-        self.playerView.initWithItem(self.clips[indexPath.row])
+        self.playerView.showWithItem(self.clips[indexPath.row])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
